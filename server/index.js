@@ -8,7 +8,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: ["http://localhost:5173", "https://clark-houses-boundaries-describes.trycloudflare.com","https://unocord.vercel.app/"],
+    origin: ["http://localhost:5173","https://unocord.vercel.app"],
     methods: ["GET", "POST"]
   }
 });
