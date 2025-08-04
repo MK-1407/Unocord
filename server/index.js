@@ -456,3 +456,29 @@ const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+const axios = require('axios');
+const ioClient = require('socket.io-client');
+
+const BACKEND_URL = 'https://unocord.onrender.com'; // Your Render backend URL
+
+// Keep-alive ping every 5 mins
+setInterval(() => {
+  axios.get(BACKEND_URL)
+    .then(() => console.log('[KEEP-ALIVE] Pinged backend'))
+    .catch(err => console.error('[KEEP-ALIVE ERROR]', err.message));
+}, 5 * 60 * 1000); // 5 mins
+
+// Fake WebSocket traffic every 1 min
+setInterval(() => {
+  const socket = ioClient(BACKEND_URL, {
+    transports: ['websocket']
+  });
+
+  socket.on('connect', () => {
+    console.log('[FAKE SOCKET] Connected');
+    setTimeout(() => {
+      socket.disconnect();
+      console.log('[FAKE SOCKET] Disconnected');
+    }, 10000); // Stay connected for 10s
+  });
+}, 60 * 1000); // every 1 min
