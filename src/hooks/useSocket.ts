@@ -11,7 +11,7 @@ export function useSocket() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    socketRef.current = io('http://localhost:3001');
+    socketRef.current = io('observant-way-production.up.railway.app');
     
     socketRef.current.on('connect', () => {
       setConnected(true);
