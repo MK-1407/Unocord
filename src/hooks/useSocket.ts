@@ -11,7 +11,7 @@ export function useSocket() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    socketRef.current = io('observant-way-production.up.railway.app');
+    socketRef.current = io('https://unocord.onrender.com');
     
     socketRef.current.on('connect', () => {
       setConnected(true);
